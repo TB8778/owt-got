@@ -6,6 +6,15 @@ import {environment} from '../../../environments/environment';
 import {Character} from '../../models/character';
 import {queryHelper} from '../helpers/query-helper';
 
+type CharacterFilter = {
+  name?: string;
+  gender?: string;
+  culture?: string;
+  born?: string;
+  died?: string;
+  isAlive?: boolean;
+}
+
 @Injectable()
 export class CharacterStoreService {
 
@@ -16,20 +25,9 @@ export class CharacterStoreService {
   }
 
 
-  retrieveCharacterList({name, gender, culture, born, died, isAlive}: {
-    name?: string, gender?: string, culture?: string, born?: string, died?: string, isAlive?: boolean
-  } = {}): Observable<Character[]> {
+  retrieveCharacterList(characterFilter: CharacterFilter = {}): Observable<Character[]> {
 
-    const params = {
-      name,
-      gender,
-      culture,
-      born,
-      died,
-      isAlive,
-    };
-
-    return this.httpClient.get(`${this.apiBaseUrl}${this.apiRelativeUrl}${queryHelper(params)}`)
+    return this.httpClient.get(`${this.apiBaseUrl}${this.apiRelativeUrl}${queryHelper(characterFilter)}`)
       .pipe(
         map((characterList: any) => {
           return characterList.map(character => new Character(character));
