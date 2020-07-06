@@ -3,7 +3,7 @@ export class Book {
   name: string;
   isbn: string;
   authors: string[];
-  numberOfPages: string;
+  numberOfPages: number;
   publisher: string;
   country: string;
   mediaType: string;
@@ -11,7 +11,7 @@ export class Book {
   characters: string[];
   povCharacters: string[];
 
-  constructor(args: Partial<Book>) {
+  constructor(args?: Partial<Book>) {
     if (args == null) {
       return;
     }
@@ -19,7 +19,7 @@ export class Book {
     this.name = args.name || '';
     this.isbn = args.isbn || '';
     this.authors = args.authors || [];
-    this.numberOfPages = args.numberOfPages || '';
+    this.numberOfPages = args.numberOfPages || 0;
     this.publisher = args.publisher || '';
     this.country = args.country || '';
     this.mediaType = args.mediaType || '';
