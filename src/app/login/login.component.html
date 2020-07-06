@@ -1,1 +1,17 @@
-<p>login works!</p>
+<form class="login-form flex flex-row items-center justify-center">
+
+  <mat-form-field class="mr4">
+
+    <mat-label>Votre nom ?</mat-label>
+
+    <input matInput [formControl]="nameFormControl" placeholder="Votre nom">
+
+    <mat-error *ngIf="nameFormControl.hasError('required')">
+      Ne soyez pas timide :-)
+    </mat-error>
+
+  </mat-form-field>
+
+  <button mat-flat-button color="primary">Me connecter</button>
+
+</form>
