@@ -16,7 +16,7 @@ export class House {
   cadetBranches: string[];
   swornMembers: string[];
 
-  constructor(args: Partial<House>) {
+  constructor(args?: Partial<House>) {
     if (args == null) {
       return;
     }
