@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {BookStoreService} from './book-store.service';
-
-
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
   ],
-  providers: [BookStoreService]
+  providers: [BookStoreService],
 })
-export class BookStoreModule { }
+export class BookStoreModule {
+}
