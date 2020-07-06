@@ -16,7 +16,7 @@ export class Character {
   tvSeries: string[];
   playedBy: string[];
 
-  constructor(args: Partial<Character>) {
+  constructor(args?: Partial<Character>) {
     if (args == null) {
       return;
     }
