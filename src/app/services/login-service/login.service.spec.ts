@@ -1,12 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
+import {LoginServiceModule} from './login-service.module';
 
-import { LoginService } from './login.service';
+import {LoginService} from './login.service';
 
 describe('LoginService', () => {
   let service: LoginService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({imports: [LoginServiceModule]});
     service = TestBed.inject(LoginService);
   });
 
