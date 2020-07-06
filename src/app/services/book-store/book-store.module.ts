@@ -1,4 +1,5 @@
 import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BookStoreService} from './book-store.service';
 
@@ -6,6 +7,7 @@ import {BookStoreService} from './book-store.service';
   declarations: [],
   imports: [
     CommonModule,
+    HttpClientModule,
   ],
   providers: [BookStoreService],
 })
