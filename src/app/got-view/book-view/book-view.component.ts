@@ -51,6 +51,19 @@ export class BookViewComponent implements OnInit, OnDestroy {
     this.bookToDisplay = row;
   }
 
+  updateList({from, name, to}: { name?: string; from?: Date; to?: Date }) {
+    this.currentPage = 1;
+    this.bookListSub = this.bookStore.retrieveBookList({
+      page: 1,
+      name,
+      from,
+      to,
+    })
+      .subscribe(bookList => {
+        this.dataSource = new MatTableDataSource<Book>(bookList);
+      });
+  }
+
   _retrieveBookList() {
     this.bookListSub = this.bookStore.retrieveBookList({page: this.currentPage})
       .subscribe(bookList => {
