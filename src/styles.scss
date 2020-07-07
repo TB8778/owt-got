@@ -60,3 +60,11 @@ table {
   width: 100%;
   margin-top: 40px;
 }
+
+table[mat-table] tbody tr:hover {
+  background-color: #dedede;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
