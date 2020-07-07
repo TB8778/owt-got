@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 import {Book} from '../../models/book';
@@ -9,7 +9,7 @@ import {BookStoreService} from '../../services/book-store/book-store.service';
   templateUrl: './book-view.component.html',
   styleUrls: ['./book-view.component.scss'],
 })
-export class BookViewComponent implements OnInit {
+export class BookViewComponent implements OnInit, OnDestroy {
 
   readonly firstPage = 1; // The api paging starts at 1
   readonly lastPage = 2; // We could parse api 'link' header to retrieve this info
@@ -19,6 +19,7 @@ export class BookViewComponent implements OnInit {
   currentPage = this.firstPage;
 
   bookListSub: Subscription;
+  bookToDisplay: Book;
 
   constructor(
     private bookStore: BookStoreService,
@@ -46,10 +47,15 @@ export class BookViewComponent implements OnInit {
     this._retrieveBookList();
   }
 
+  displayDetails(row: Book) {
+    this.bookToDisplay = row;
+  }
+
   _retrieveBookList() {
     this.bookListSub = this.bookStore.retrieveBookList({page: this.currentPage})
       .subscribe(bookList => {
         this.dataSource = new MatTableDataSource<Book>(bookList);
       });
   }
+
 }

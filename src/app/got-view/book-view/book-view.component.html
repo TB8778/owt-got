@@ -36,13 +36,17 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayDetails(row)"></tr>
 
   </table>
 
-  <div>
+  <div class="my2">
     <button *ngIf="currentPage > firstPage" (click)="displayPrevious()">Previous</button>
     <button *ngIf="currentPage < lastPage" (click)="displayNext()">Next</button>
+  </div>
+
+  <div *ngIf="bookToDisplay">
+    <app-book-details [book]="bookToDisplay"></app-book-details>
   </div>
 
 </div>

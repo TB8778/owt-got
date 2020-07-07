@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Character} from '../../models/character';
@@ -43,6 +43,19 @@ export class CharacterStoreService {
       .pipe(
         map(character => new Character(character)),
       );
+
+  }
+
+  // Returns a simple list of characters names given their full urls from the API
+  retrieveCharactersNameFromUrls(characterUrlList: string[]) {
+
+    const obs = (url) => this.httpClient.get(url)
+      .pipe(
+        map((character: any) => character.name),
+      );
+
+    // Wait for all responses
+    return forkJoin(characterUrlList.map(url => obs(url)));
 
   }
 
