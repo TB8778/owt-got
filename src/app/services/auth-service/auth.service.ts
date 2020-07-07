@@ -26,6 +26,11 @@ export class AuthService {
     return !!auth?.name;
   }
 
+  getName(): string {
+    const auth = this._retrieveLogin();
+    return auth?.name;
+  }
+
   _retrieveLogin(): GotAuth {
     const auth = localStorage.getItem(this.loginStorageKey);
     if (auth == null) {
