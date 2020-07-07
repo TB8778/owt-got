@@ -16,12 +16,13 @@ export class BookStoreService {
   }
 
 
-  retrieveBookList({name, from, to}: {
-    name?: string, from?: Date, to?: Date
-  } = {}): Observable<Book[]> {
+  retrieveBookList({name, from, to, page}: {
+    name?: string, from?: Date, to?: Date, page?: number
+  } = {page: 1}): Observable<Book[]> {
 
     const params = {
       name: name,
+      page: page,
       fromReleaseDate: from && from.toISOString().substr(0, 10),
       toReleaseDate: to && to.toISOString().substr(0, 10),
     };

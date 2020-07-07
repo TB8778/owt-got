@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 import {Book} from '../../models/book';
 import {BookStoreService} from '../../services/book-store/book-store.service';
@@ -10,8 +11,12 @@ import {BookStoreService} from '../../services/book-store/book-store.service';
 })
 export class BookViewComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'released', 'authors', 'publisher', 'isbn', 'numberOfPages'];
-  dataSource: Book[] = [];
+  readonly firstPage = 1; // The api paging starts at 1
+  readonly lastPage = 2; // We could parse api 'link' header to retrieve this info
+  readonly displayedColumns: string[] = ['name', 'released', 'authors', 'publisher', 'isbn', 'numberOfPages'];
+
+  dataSource = new MatTableDataSource<Book>([]);
+  currentPage = this.firstPage;
 
   bookListSub: Subscription;
 
@@ -23,7 +28,7 @@ export class BookViewComponent implements OnInit {
   ngOnInit(): void {
     this.bookListSub = this.bookStore.retrieveBookList()
       .subscribe(bookList => {
-        this.dataSource = bookList;
+        this.dataSource = new MatTableDataSource<Book>(bookList);
       });
   }
 
@@ -31,4 +36,20 @@ export class BookViewComponent implements OnInit {
     this.bookListSub?.unsubscribe();
   }
 
+  displayPrevious() {
+    this.currentPage--;
+    this._retrieveBookList();
+  }
+
+  displayNext() {
+    this.currentPage++;
+    this._retrieveBookList();
+  }
+
+  _retrieveBookList() {
+    this.bookListSub = this.bookStore.retrieveBookList({page: this.currentPage})
+      .subscribe(bookList => {
+        this.dataSource = new MatTableDataSource<Book>(bookList);
+      });
+  }
 }
