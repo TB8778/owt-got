@@ -86,6 +86,7 @@ export class BookViewComponent implements OnInit, OnDestroy {
   _retrieveBookList(): void {
     // Since the global search is bound to the current displayed page, we need to reset whenever the page changes
     this.dataSource.filter = '';
+    // Hack to trigger the search changes to make it reset. Else we could use a service to coordinate filtering and pagination.
     this.forcedFilter = Date.now().toString();
 
     this.bookListSub = this.bookStore.retrieveBookList({

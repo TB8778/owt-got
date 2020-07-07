@@ -38,7 +38,6 @@ export class BookSearchComponent implements OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes?.forcedFilter) {
-      console.log(changes.forcedFilter);
       this.searchValue = '';
     }
   }
