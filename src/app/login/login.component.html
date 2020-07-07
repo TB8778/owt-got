@@ -1,19 +1,19 @@
-<form class="login-form flex flex-row items-center justify-center"
+<form class="login-form flex flex-column items-center justify-center"
       [formGroup]="loginForm"
       (ngSubmit)="login(loginForm.value)">
 
-  <mat-form-field class="mr4">
+  <mat-form-field class="mb4">
 
-    <mat-label for="name">Votre nom ?</mat-label>
+    <mat-label for="name">What's your name ?</mat-label>
 
     <input id="name" name="name" type="text" formControlName="name" matInput [formControlName]="'name'">
 
     <mat-error *ngIf="loginForm.controls.name.hasError('required')">
-      Ne soyez pas timide :-)
+      Don't be shy :-)
     </mat-error>
 
   </mat-form-field>
 
-  <button mat-flat-button color="primary" [disabled]="!loginForm.valid">Me connecter</button>
+  <button mat-flat-button color="primary" [disabled]="!loginForm.valid">Login</button>
 
 </form>
