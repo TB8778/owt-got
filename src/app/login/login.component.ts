@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {allRoutes} from '../app-routing.module';
+import {allRoutes} from '../all-routes';
 import {AuthService} from '../services/auth-service/auth.service';
 
 @Component({
@@ -26,6 +26,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.router.navigate([allRoutes.gotView]);
+    }
   }
 
   login({name}: { name: string }): void {

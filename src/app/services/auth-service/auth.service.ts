@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   login(name: string): GotAuth {
-    localStorage.setItem(this.loginStorageKey, name);
+    localStorage.setItem(this.loginStorageKey, JSON.stringify({name}));
     return {name};
   }
 
@@ -22,7 +22,8 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    return this._retrieveLogin() == null;
+    const auth = this._retrieveLogin();
+    return !!auth?.name;
   }
 
   _retrieveLogin(): GotAuth {
