@@ -1,5 +1,7 @@
 <app-book-filter (updateSearch)="updateList($event)"></app-book-filter>
 
+<app-book-search [forcedFilter]="forcedFilter" (newSearchValue)="filterLocalList($event)"></app-book-search>
+
 <!-- This could be a subcomponent also -->
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -43,8 +45,8 @@
 </table>
 
 <div class="my2">
-  <button *ngIf="currentPage > firstPage" (click)="displayPrevious()">Previous</button>
-  <button *ngIf="currentPage < lastPage" (click)="displayNext()">Next</button>
+  <button *ngIf="currentPage > firstPage" (click)="displayPrevious()">Previous page</button>
+  <button *ngIf="currentPage < lastPage" (click)="displayNext()">Next page</button>
 </div>
 
 <div *ngIf="bookToDisplay">

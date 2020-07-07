@@ -12,9 +12,10 @@ import {CharacterStoreModule} from '../../services/character-store/character-sto
 import {BookDetailsComponent} from './book-details/book-details.component';
 import {BookViewComponent} from './book-view.component';
 import { BookFilterComponent } from './book-filter/book-filter.component';
+import { BookSearchComponent } from './book-search/book-search.component';
 
 @NgModule({
-  declarations: [BookViewComponent, BookDetailsComponent, BookFilterComponent],
+  declarations: [BookViewComponent, BookDetailsComponent, BookFilterComponent, BookSearchComponent],
   imports: [
     BookStoreModule,
     CharacterStoreModule,

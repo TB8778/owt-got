@@ -21,6 +21,7 @@ export class BookViewComponent implements OnInit, OnDestroy {
   currentFilter: BookFilter = {};
   currentPage = this.firstPage;
   dataSource = new MatTableDataSource<Book>([]);
+  forcedFilter: string;
 
   constructor(
     private bookStore: BookStoreService,
@@ -28,10 +29,7 @@ export class BookViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.bookListSub = this.bookStore.retrieveBookList()
-      .subscribe(bookList => {
-        this.dataSource = new MatTableDataSource<Book>(bookList);
-      });
+    this._retrieveBookList();
   }
 
   ngOnDestroy(): void {
@@ -58,14 +56,45 @@ export class BookViewComponent implements OnInit, OnDestroy {
     this._retrieveBookList();
   }
 
-  _retrieveBookList() {
+  filterLocalList(searchedStr: string) {
+    this.dataSource.filter = searchedStr;
+  }
+
+  // Search the global field in any property of all books from the current page
+  // This has to be called whenever the datasource is reinstancied
+  _addFilterPredicate(): void {
+    this.dataSource.filterPredicate = (book: Book, filter: string) => {
+
+      if (!filter) {
+        return true;
+      }
+
+      // Make search case insensitive
+      const _filter = filter.toLowerCase();
+
+      return book.name.toLowerCase().includes(_filter)
+        || book.country.toLowerCase().includes(_filter)
+        || book.released.toLocaleDateString().includes(_filter)
+        || book.isbn.toLowerCase().includes(_filter)
+        || book.mediaType.toLowerCase().includes(_filter)
+        || book.numberOfPages.toString().includes(_filter)
+        || book.publisher.toLowerCase().includes(_filter)
+        || book.authors.some(author => author.toLowerCase().includes(_filter));
+    };
+  }
+
+  _retrieveBookList(): void {
+    // Since the global search is bound to the current displayed page, we need to reset whenever the page changes
+    this.dataSource.filter = '';
+    this.forcedFilter = Date.now().toString();
+
     this.bookListSub = this.bookStore.retrieveBookList({
       ...this.currentFilter,
       page: this.currentPage,
     })
       .subscribe(bookList => {
         this.dataSource = new MatTableDataSource<Book>(bookList);
+        this._addFilterPredicate();
       });
   }
-
 }
