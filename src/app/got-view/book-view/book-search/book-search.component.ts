@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
 @Component({
@@ -13,8 +13,8 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   @Output() newSearchValue = new EventEmitter<string>();
 
   searchValue: string = '';
-  searchSubject: Subject = new Subject<string>();
-  searchDebounce$: Observable<string>;
+  searchSubject: Subject<string> = new Subject<string>();
+  searchDebounce$: Subscription;
 
   constructor() {
   }
