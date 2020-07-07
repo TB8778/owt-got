@@ -69,7 +69,13 @@ export class CharacterStoreService {
     };
 
     // Wait for all responses
-    return forkJoin(characterUrlList.map(url => charName$(url)));
+    return forkJoin(characterUrlList.map(url => charName$(url)))
+      .pipe(
+        map(nameList => {
+          // Remove empty names as some characters don't have any
+          return nameList.filter(name => name?.length > 0);
+        }),
+      );
 
   }
 
