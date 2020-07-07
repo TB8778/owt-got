@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CharacterViewComponent } from './character-view.component';
+import {CharacterViewComponent} from './character-view.component';
+import {CharacterViewModule} from './character-view.module';
 
 describe('CharacterViewComponent', () => {
   let component: CharacterViewComponent;
@@ -8,9 +9,9 @@ describe('CharacterViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CharacterViewComponent ]
+      imports: [CharacterViewModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

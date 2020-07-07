@@ -26,7 +26,7 @@ describe('BookStoreService', () => {
       bookList = _bookList;
     });
 
-    const req = httpTestingController.expectOne('https://www.anapioficeandfire.com/api/books');
+    const req = httpTestingController.expectOne('https://www.anapioficeandfire.com/api/books?page=1');
 
     req.flush(mockedBookList);
 

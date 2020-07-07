@@ -1,7 +1,7 @@
 <mat-card>
 
   <mat-card-header>
-    <mat-card-title>Details of {{ book.name }}</mat-card-title>
+    <mat-card-title>Details of {{ book?.name }}</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
@@ -9,31 +9,31 @@
     <table>
       <tr>
         <td> ISBN-13</td>
-        <td>{{ book.isbn }}</td>
+        <td>{{ book?.isbn }}</td>
       </tr>
       <tr>
         <td> Authors</td>
-        <td>{{ book.authors?.join(', ') }}</td>
+        <td>{{ book?.authors?.join(', ') }}</td>
       </tr>
       <tr>
         <td> Pages</td>
-        <td>{{ book.numberOfPages }}</td>
+        <td>{{ book?.numberOfPages }}</td>
       </tr>
       <tr>
         <td> Publisher</td>
-        <td>{{ book.publisher }}</td>
+        <td>{{ book?.publisher }}</td>
       </tr>
       <tr>
         <td> Country</td>
-        <td>{{ book.country }}</td>
+        <td>{{ book?.country }}</td>
       </tr>
       <tr>
         <td> Media Type</td>
-        <td>{{ book.mediaType }}</td>
+        <td>{{ book?.mediaType }}</td>
       </tr>
       <tr>
         <td> Release date</td>
-        <td>{{ book.released?.toLocaleDateString() }}</td>
+        <td>{{ book?.released?.toLocaleDateString() }}</td>
       </tr>
       <tr>
         <td> Characters</td>

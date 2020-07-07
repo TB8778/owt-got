@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
-import { BookViewComponent } from './book-view.component';
+import {BookViewComponent} from './book-view.component';
+import {BookViewModule} from './book-view.module';
 
 describe('BookViewComponent', () => {
   let component: BookViewComponent;
@@ -8,9 +10,9 @@ describe('BookViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookViewComponent ]
+      imports: [BookViewModule, NoopAnimationsModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

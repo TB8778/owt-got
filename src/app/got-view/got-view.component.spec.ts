@@ -1,6 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {AppRoutingModule} from '../app-routing.module';
 
-import { GotViewComponent } from './got-view.component';
+import {GotViewComponent} from './got-view.component';
+import {GotViewModule} from './got-view.module';
 
 describe('GotViewComponent', () => {
   let component: GotViewComponent;
@@ -8,9 +11,10 @@ describe('GotViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GotViewComponent ]
+      imports: [GotViewModule,
+        AppRoutingModule, NoopAnimationsModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

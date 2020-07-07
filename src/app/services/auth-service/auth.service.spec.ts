@@ -1,12 +1,15 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
+import {AuthServiceModule} from './auth-service.module';
 
-import { AuthService } from './auth.service';
+import {AuthService} from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [AuthServiceModule],
+    });
     service = TestBed.inject(AuthService);
   });
 

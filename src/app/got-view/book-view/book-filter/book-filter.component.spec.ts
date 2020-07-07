@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BookViewModule} from '../book-view.module';
 
-import { BookFilterComponent } from './book-filter.component';
+import {BookFilterComponent} from './book-filter.component';
 
 describe('BookFilterComponent', () => {
   let component: BookFilterComponent;
@@ -8,9 +10,9 @@ describe('BookFilterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookFilterComponent ]
+      imports: [BookViewModule, NoopAnimationsModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
