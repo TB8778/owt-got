@@ -3,6 +3,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 import {Book} from '../../models/book';
 import {BookStoreService} from '../../services/book-store/book-store.service';
+import {BookFilter} from './book-filter/book-filter';
 
 @Component({
   selector: 'app-book-view',
@@ -15,11 +16,11 @@ export class BookViewComponent implements OnInit, OnDestroy {
   readonly lastPage = 2; // We could parse api 'link' header to retrieve this info
   readonly displayedColumns: string[] = ['name', 'released', 'authors', 'publisher', 'isbn', 'numberOfPages'];
 
-  dataSource = new MatTableDataSource<Book>([]);
-  currentPage = this.firstPage;
-
   bookListSub: Subscription;
   bookToDisplay: Book;
+  currentFilter: BookFilter = {};
+  currentPage = this.firstPage;
+  dataSource = new MatTableDataSource<Book>([]);
 
   constructor(
     private bookStore: BookStoreService,
@@ -51,21 +52,17 @@ export class BookViewComponent implements OnInit, OnDestroy {
     this.bookToDisplay = row;
   }
 
-  updateList({from, name, to}: { name?: string; from?: Date; to?: Date }) {
+  updateList(bookFilter: BookFilter) {
     this.currentPage = 1;
-    this.bookListSub = this.bookStore.retrieveBookList({
-      page: 1,
-      name,
-      from,
-      to,
-    })
-      .subscribe(bookList => {
-        this.dataSource = new MatTableDataSource<Book>(bookList);
-      });
+    this.currentFilter = bookFilter;
+    this._retrieveBookList();
   }
 
   _retrieveBookList() {
-    this.bookListSub = this.bookStore.retrieveBookList({page: this.currentPage})
+    this.bookListSub = this.bookStore.retrieveBookList({
+      ...this.currentFilter,
+      page: this.currentPage,
+    })
       .subscribe(bookList => {
         this.dataSource = new MatTableDataSource<Book>(bookList);
       });

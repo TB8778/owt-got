@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {BookFilter} from './book-filter';
 
 @Component({
   selector: 'app-book-filter',
@@ -7,7 +8,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class BookFilterComponent implements OnInit {
 
-  @Output() updateSearch = new EventEmitter<{ name?: string, from?: Date, to?: Date }>();
+  @Output() updateSearch = new EventEmitter<BookFilter>();
 
   searchedName: string;
   searchedDateStart: Date;
