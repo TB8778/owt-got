@@ -45,8 +45,16 @@
 </table>
 
 <div class="my2">
-  <button *ngIf="currentPage > firstPage" (click)="displayPrevious()">Previous page</button>
-  <button *ngIf="currentPage < lastPage" (click)="displayNext()">Next page</button>
+  <button mat-flat-button
+          color="primary"
+          *ngIf="currentPage > firstPage"
+          (click)="displayPrevious()">Previous page
+  </button>
+  <button mat-flat-button
+          color="primary"
+          *ngIf="currentPage < lastPage"
+          (click)="displayNext()">Next page
+  </button>
 </div>
 
 <div *ngIf="bookToDisplay">
