@@ -7,7 +7,7 @@ export class Book {
   publisher: string;
   country: string;
   mediaType: string;
-  released: string;
+  released: Date;
   characters: string[];
   povCharacters: string[];
 
@@ -23,7 +23,7 @@ export class Book {
     this.publisher = args.publisher || '';
     this.country = args.country || '';
     this.mediaType = args.mediaType || '';
-    this.released = args.released || '';
+    this.released = args.released && new Date(args.released) || null;
     this.characters = args.characters || [];
     this.povCharacters = args.povCharacters || [];
   }
