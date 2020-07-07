@@ -1,1 +1,31 @@
-<p>got-view works!</p>
+<app-header></app-header>
+
+
+<mat-tab-group class="my2 mx4">
+
+
+  <mat-tab label="Books">
+    <!-- This allows lazy loading -->
+    <ng-template matTabContent>
+      Content 1
+    </ng-template>
+  </mat-tab>
+
+
+  <mat-tab label="Houses">
+    <!-- This allows lazy loading -->
+    <ng-template matTabContent>
+      Content 2
+    </ng-template>
+  </mat-tab>
+
+
+  <mat-tab label="Characters">
+    <!-- This allows lazy loading -->
+    <ng-template matTabContent>
+      Content 3
+    </ng-template>
+  </mat-tab>
+
+
+</mat-tab-group>
