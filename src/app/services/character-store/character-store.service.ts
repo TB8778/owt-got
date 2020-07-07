@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {forkJoin, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {forkJoin, Observable, of} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Character} from '../../models/character';
 import {queryHelper} from '../helpers/query-helper';
@@ -20,6 +20,8 @@ export class CharacterStoreService {
 
   apiBaseUrl = environment.apiBaseUrl;
   apiRelativeUrl = '/characters';
+
+  cachedCharacterList: { [url: string]: string } = {};
 
   constructor(private httpClient: HttpClient) {
   }
@@ -49,13 +51,25 @@ export class CharacterStoreService {
   // Returns a simple list of characters names given their full urls from the API
   retrieveCharactersNameFromUrls(characterUrlList: string[]) {
 
-    const obs = (url) => this.httpClient.get(url)
-      .pipe(
-        map((character: any) => character.name),
-      );
+    // Returns an observable which retrieves the name from the cache or from the API if needed
+    const charName$ = (url) => {
+
+      if (this.cachedCharacterList[url] != null) {
+        return of(this.cachedCharacterList[url]);
+      }
+
+      return this.httpClient.get(url)
+        .pipe(
+          map((character: any) => character.name),
+          tap(charName => {
+            this.cachedCharacterList[url] = charName;
+          }),
+        );
+
+    };
 
     // Wait for all responses
-    return forkJoin(characterUrlList.map(url => obs(url)));
+    return forkJoin(characterUrlList.map(url => charName$(url)));
 
   }
 
