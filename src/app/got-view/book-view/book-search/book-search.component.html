@@ -1,0 +1,24 @@
+<mat-card class="my2">
+
+  <mat-card-header>
+    UC3 - Local magic search (as the API doesn't allow to search any field)
+  </mat-card-header>
+
+  <mat-card-content class="my2">
+
+    <mat-form-field class="m2">
+      <mat-label>Book search</mat-label>
+
+      <input matInput
+             name="book-search"
+             [(ngModel)]="searchValue"
+             (keyup)="searchInputChanged()"
+      >
+
+    </mat-form-field>
+
+    <button mat-flat-button color="warn" class="ml2" (click)="clearSearch($event)">Clear</button>
+
+  </mat-card-content>
+
+</mat-card>
